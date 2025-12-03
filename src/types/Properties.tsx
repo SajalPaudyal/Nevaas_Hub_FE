@@ -8,5 +8,7 @@ export interface Property{
     type:string;
     imageUrl:string;
     badge:string;
+    latitude:string;
+    longitude:string;
     isRoommateOption?:boolean;
 }
