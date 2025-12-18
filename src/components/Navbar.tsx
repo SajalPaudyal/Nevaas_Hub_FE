@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <button
                   type="button"
-                  className="hidden lg:inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-lg shadow-md text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition duration-150 ease-in-out transform hover:-translate-y-0.5"
+                  className="hidden lg:inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-lg shadow-md text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition duration-150 ease-in-out transform hover:-translate-y-0.5 cursor-pointer"
                 >
                   Log In
                 </button>

@@ -61,7 +61,7 @@ const Hero = () => {
                 className="w-full outline-none text-gray-700 placeholder-gray-400"
               />
             </div>
-            <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-0 rounded-lg font-semibold transition flex items-center justify-center shadow-md">
+            <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-0 rounded-lg font-semibold transition flex items-center justify-center shadow-md cursor-pointer">
               <Search className="w-5 h-5 md:mr-2" />
               <span className="hidden md:inline">Search</span>
             </button>
