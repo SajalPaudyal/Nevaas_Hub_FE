@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
                   href="/"
                   className="text-2xl font-bold text-indigo-700 tracking-light"
                 >
-                  Neevaas<span className="text-gray-900">Hub</span>
+                  Nivaas<span className="text-gray-900">Hub</span>
                 </a>
               </div>
               <div className="hidden lg:flex md:space-x-8 lg:space-x-10 items-center">
