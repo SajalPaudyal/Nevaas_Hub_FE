@@ -1,13 +1,21 @@
 import { Menu, MountainSnow, X } from "lucide-react";
 import { useState } from "react";
 import { NavItems } from "../data/NavItems";
+import Modal from "./Modal";
+import AuthenticationModal from "../pages/Authentication/AuthenticationModal";
 
 const Navbar: React.FC = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [openAuth, setOpenAuth] = useState(false);
 
   const toggleNavbar = () => setIsNavOpen(!isNavOpen);
+  const openAuthModal = () => {
+    setOpenAuth(true);
+    setIsNavOpen(false);
+  };
 
   return (
+    <>
       <div className="sticky top-0 z-50 p-4  backdrop-blur-sm">
         <nav className="mx-auto max-w-7xl bg-white rounded-xl shadow-xl transition-all duration-300">
           <div className="px-4 sm:px-6 lg:px-8">
@@ -38,6 +46,7 @@ const Navbar: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <button
                   type="button"
+                  onClick={openAuthModal}
                   className="hidden lg:inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-lg shadow-md text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition duration-150 ease-in-out transform hover:-translate-y-0.5 cursor-pointer"
                 >
                   Log In
@@ -75,14 +84,22 @@ const Navbar: React.FC = () => {
                 ))}
               </div>
               <div className="flex items-center justify-center">
-                <button type="button" className="w-1/2 mb-5 flex justify-center items-center px-4 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-gray-700 hover:bg-gray-600">
-                    Log In
+                <button
+                  type="button"
+                  onClick={openAuthModal}
+                  className="w-1/2 mb-5 flex justify-center items-center px-4 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-gray-700 hover:bg-gray-600"
+                >
+                  Log In
                 </button>
               </div>
             </div>
           )}
         </nav>
       </div>
+      <Modal isOpen={openAuth} onClose={() => setOpenAuth(false)}>
+        <AuthenticationModal />
+      </Modal>
+    </>
   );
 };
 
