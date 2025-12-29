@@ -1,10 +1,15 @@
-import { Menu, MountainSnow, X } from "lucide-react";
+import { Menu, MountainSnow, User, X } from "lucide-react";
 import { useState } from "react";
 import { NavItems } from "../data/NavItems";
+import { useDispatch, useSelector } from "react-redux";
+import { type RootState } from "../store/store";
+import { logout } from "../store/slices/authSlices";
 import Modal from "./Modal";
 import AuthenticationModal from "../pages/Authentication/AuthenticationModal";
 
 const Navbar: React.FC = () => {
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [openAuth, setOpenAuth] = useState(false);
 
@@ -44,13 +49,27 @@ const Navbar: React.FC = () => {
                 ))}
               </div>
               <div className="flex items-center space-x-4">
-                <button
-                  type="button"
-                  onClick={openAuthModal}
-                  className="hidden lg:inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-lg shadow-md text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition duration-150 ease-in-out transform hover:-translate-y-0.5 cursor-pointer"
-                >
-                  Log In
-                </button>
+                {isAuthenticated ? (
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-indigo-400 flex items-center justify-center text-white font-bold shadow-md cursor-pointer hover:bg-indigo-700 transition-all">
+                      <User w-7 h-7 />
+                    </div>
+                    <button
+                      onClick={() => dispatch(logout())}
+                      className="hidden lg:inline-flex items-center px-5 py-2 border border-violet-700 text-sm font-medium rounded-lg shadow-md text-violet-700 bg-gray-100 hover:bg-violet-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition duration-150 ease-in-out transform hover:-translate-y-0.5 cursor-pointer"
+                    >
+                      Log Out
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={openAuthModal}
+                    className="hidden lg:inline-flex items-center px-5 py-2 border border-transparent text-sm font-medium rounded-lg shadow-md text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition duration-150 ease-in-out transform hover:-translate-y-0.5 cursor-pointer"
+                  >
+                    Log In
+                  </button>
+                )}
 
                 <div className="lg:hidden">
                   <button
@@ -84,20 +103,31 @@ const Navbar: React.FC = () => {
                 ))}
               </div>
               <div className="flex items-center justify-center">
-                <button
-                  type="button"
-                  onClick={openAuthModal}
-                  className="w-1/2 mb-5 flex justify-center items-center px-4 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-gray-700 hover:bg-gray-600"
-                >
-                  Log In
-                </button>
+                {isAuthenticated ? (
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => dispatch(logout(), setIsNavOpen(false))}
+                      className="w-full mb-5 flex justify-center items-center px-4 py-3 border border-violet-700 text-base font-medium rounded-lg shadow-sm text-violet-700 bg-gray-100 hover:bg-violet-600 hover:text-white"
+                    >
+                      Log Out
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={openAuthModal}
+                    className="w-1/2 mb-5 flex justify-center items-center px-4 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-gray-700 hover:bg-gray-600"
+                  >
+                    Log In
+                  </button>
+                )}
               </div>
             </div>
           )}
         </nav>
       </div>
       <Modal isOpen={openAuth} onClose={() => setOpenAuth(false)}>
-        <AuthenticationModal />
+        <AuthenticationModal onClose={() => setOpenAuth(false)} />
       </Modal>
     </>
   );

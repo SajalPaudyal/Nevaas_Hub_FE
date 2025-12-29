@@ -1,6 +1,11 @@
 import { useState } from "react";
+import SignUp from "./SignUp";
+import Login from "./Login";
 
-const AuthenticationModal = () => {
+interface AuthModalProps {
+  onClose: () => void;
+}
+const AuthenticationModal: React.FC<AuthModalProps> = ({ onClose }) => {
   const [activeTab, setActiveTab] = useState<"login" | "signup">("login");
   return (
     <div className="w-full">
@@ -30,19 +35,9 @@ const AuthenticationModal = () => {
 
       <div className="p-6">
         {activeTab === "login" ? (
-          <div className="py-4">
-            <h2 className="text-xl font-bold mb-4">Welcome Back</h2>
-            <p className="text-gray-500 text-sm">Login Form...</p>
-          </div>
+          <Login onSuccess={onClose}/>
         ) : (
-          <div className="py-4 flex flex-col items-center justify-center">
-            <h2 className="text-xl font-bold mb-4">New to NivaasHub?</h2>
-            <p className="text-gray-500 text-sm">Please fill up the form</p>
-            <p className="text-indigo-600 text-sm">
-              {" "}
-              let's find you a new home together
-            </p>
-          </div>
+          <SignUp onSuccess={onClose} />
         )}
       </div>
     </div>

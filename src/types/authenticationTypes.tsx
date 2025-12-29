@@ -4,3 +4,8 @@ export interface RegisterUser {
   password: string;
   idCard: FileList;
 }
+
+export interface SignInUser {
+  email: string;
+  password: string;
+}
