@@ -6,6 +6,7 @@ import { type RootState } from "../store/store";
 import { logout } from "../store/slices/authSlices";
 import Modal from "./Modal";
 import AuthenticationModal from "../pages/Authentication/AuthenticationModal";
+import { Link } from "react-router";
 
 const Navbar: React.FC = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
@@ -38,15 +39,23 @@ const Navbar: React.FC = () => {
               </div>
               <div className="hidden lg:flex md:space-x-8 lg:space-x-10 items-center">
                 {NavItems.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    to={item.href}
                     className="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition duration-150 ease-in-out flex items-center"
                   >
                     <item.icon className="w-4 h-4 mr-2 opacity-70" />
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
+                {isAuthenticated && (
+                  <Link
+                    to="/my-properties"
+                    className="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-bold flex items-center gap-2"
+                  >
+                    My Properties
+                  </Link>
+                )}
               </div>
               <div className="flex items-center space-x-4">
                 {isAuthenticated ? (
@@ -91,16 +100,24 @@ const Navbar: React.FC = () => {
             <div className="lg:hidden border-t border-gray-100">
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {NavItems.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
+                    to={item.href}
                     onClick={() => setIsNavOpen(false)}
                     className="text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 block px-3 py-2 rounded-md text-base font-medium transition duration-150 ease-in"
                   >
                     <item.icon className="inline w-5 h-5 mr-3 text-indigo-500" />
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
+                {isAuthenticated && (
+                  <Link
+                    to="/my-properties"
+                    className="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-bold flex items-center gap-2"
+                  >
+                    My Properties
+                  </Link>
+                )}
               </div>
               <div className="flex items-center justify-center">
                 {isAuthenticated ? (

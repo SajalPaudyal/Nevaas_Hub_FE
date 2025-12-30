@@ -4,7 +4,6 @@ import Hero from "./Landing/Hero";
 import RoommateFinder from "./Landing/RoommateFinder";
 import Featured from "./Landing/Featured";
 import WhyUs from "./Landing/WhyUs";
-import Footer from "../components/Footer";
 
 const Landing: React.FC = () => {
   return (
@@ -14,7 +13,6 @@ const Landing: React.FC = () => {
       <RoommateFinder/>
       <Featured/>
       <WhyUs/>
-      <Footer/>
     </>
   );
 };
