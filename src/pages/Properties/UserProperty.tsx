@@ -1,19 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-import api from "../../api/axios";
 import { Building, Plus } from "lucide-react";
 import { Link } from "react-router";
 import PropertyCard from "../../components/Properties/PropertyCard";
+import Modal from "../../components/Modal";
+import AddProperty from "./AddProperty";
+import privateApi from "../../api/privateApi";
 
 const UserProperty = () => {
   const [userProperties, setUserProperties] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    api.get("/properties").then((res) => {
-      setUserProperties(res.data);
-    });
-  }, []);
+    privateApi
+      .get("/properties/my-properties")
+      .then((res) => {
+        setUserProperties(res.data);
+      })
+      .catch((err) => {
+        console.error("Axios Error:", err.response?.data || err.message);
+      });
+  });
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
@@ -33,17 +40,20 @@ const UserProperty = () => {
       {userProperties.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {userProperties.map((prop: any) => (
-            <Link key={prop.id} to={`/manage-property/${prop.id}`}>
+            <Link key={prop.id} to={`/property/${prop.id}`}>
               <PropertyCard property={prop} />
             </Link>
           ))}
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center py-20 bg-white rounded-3xl">
-            <Building className="w-12 h-12 text-violet-500 mb-4"/>
-            <p>You have not added any properties yet.</p>
+          <Building className="w-12 h-12 text-violet-500 mb-4" />
+          <p>You have not added any properties yet.</p>
         </div>
       )}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <AddProperty onSuccess={() => setIsModalOpen(false)} />
+      </Modal>
     </div>
   );
 };

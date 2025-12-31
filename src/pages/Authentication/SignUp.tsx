@@ -1,6 +1,6 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import type { RegisterUser } from "../../types/authenticationTypes";
-import api from "../../api/axios";
+import {api} from "../../api/axios";
 import toast from "react-hot-toast";
 import {
   AlertCircle,

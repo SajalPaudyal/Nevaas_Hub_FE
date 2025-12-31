@@ -5,6 +5,8 @@ import Landing from "./pages/Landing";
 import { Route, Routes } from "react-router";
 import PropertyPage from "./pages/Properties/PropertyPage";
 import Footer from "./components/Footer";
+import UserProperty from "./pages/Properties/UserProperty";
+import SingleProperty from "./pages/Properties/SingleProperty";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/properties" element={<PropertyPage />} />
+          <Route path="my-properties" element={<UserProperty />} />
+          <Route path="/property/:id" element={<SingleProperty />} />
         </Routes>
       </main>
       <Footer />

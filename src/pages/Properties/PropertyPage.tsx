@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import api from "../../api/axios";
+import { api } from "../../api/axios";
 import PropertyCard from "../../components/Properties/PropertyCard";
 import { FilterSidebar } from "../../components/Properties/FilterSidebar";
 import { type Property } from "../../types/Properties";
 import { Filter, X } from "lucide-react";
+import { Link } from "react-router";
 
 const PropertyPage = () => {
   const [data, setData] = useState<Property[]>([]);
@@ -91,10 +92,9 @@ const PropertyPage = () => {
           </div>
 
           <div className="flex-1">
-            <div className="hidden lg:flex mb-8 items-center justify-between" >
+            <div className="hidden lg:flex mb-8 items-center justify-between">
               <h1 className="text-3xl font-black text-gray-900">
                 Explore Properties
-                
               </h1>
             </div>
 
@@ -110,7 +110,9 @@ const PropertyPage = () => {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
                 {filteredProperties.map((item) => (
-                  <PropertyCard key={item.id} property={item} />
+                  <Link key={item.id} to={`/property/${item.id}`}>
+                    <PropertyCard property={item} />
+                  </Link>
                 ))}
               </div>
             )}

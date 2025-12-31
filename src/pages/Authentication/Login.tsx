@@ -1,6 +1,6 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
-import api from "../../api/axios";
+import {api} from "../../api/axios";
 import { type SignInUser } from "../../types/authenticationTypes";
 import { AlertCircle, Eye, EyeClosed, Lock, Mail } from "lucide-react";
 import { useState } from "react";
