@@ -17,6 +17,7 @@ import { type RootState } from "../../store/store";
 import Modal from "../../components/Modal";
 import toast from "react-hot-toast";
 import EditProperty from "./EditProperty";
+import privateApi from "../../api/privateApi";
 
 const SingleProperty = () => {
   const { id } = useParams();
@@ -50,7 +51,7 @@ const SingleProperty = () => {
     if (!window.confirm("Are you sure you want to delete this listing?"))
       return;
     try {
-      await api.delete(`/properties/${id}`);
+      await privateApi.delete(`/properties/${id}`);
       toast.success("Listing removed");
       navigate("/my-properties");
     } catch (err) {
