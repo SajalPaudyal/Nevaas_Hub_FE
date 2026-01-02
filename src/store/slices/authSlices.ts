@@ -2,8 +2,10 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface User {
   id: number;
-  fullName: string;
+  name: string;
   email: string;
+  role: "user" | "admin";
+  status: "pending" | "accepted" | "rejected";
 }
 
 interface AuthState {

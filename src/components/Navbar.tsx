@@ -1,4 +1,4 @@
-import { Menu, MountainSnow, User, X } from "lucide-react";
+import { Menu, MountainSnow, Signature, User, X } from "lucide-react";
 import { useState } from "react";
 import { NavItems } from "../data/NavItems";
 import { useDispatch, useSelector } from "react-redux";
@@ -51,8 +51,9 @@ const Navbar: React.FC = () => {
                 {isAuthenticated && (
                   <Link
                     to="/my-properties"
-                    className="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-bold flex items-center gap-2"
+                    className="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition duration-150 ease-in-out flex items-center"
                   >
+                    <Signature className="w-4 h-4 mr-2 opacity-70"/>
                     My Properties
                   </Link>
                 )}
@@ -113,7 +114,7 @@ const Navbar: React.FC = () => {
                 {isAuthenticated && (
                   <Link
                     to="/my-properties"
-                    className="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-bold flex items-center gap-2"
+                    className="text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 block px-3 py-2 rounded-md text-base font-medium transition duration-150 ease-in"
                   >
                     My Properties
                   </Link>

@@ -3,15 +3,7 @@
 import { useParams, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  Trash,
-  Edit3,
-  MapPin,
-  Bed,
-  Bath,
-  ArrowLeft,
-  Form,
-} from "lucide-react";
+import { Trash, Edit3, MapPin, Bed, Bath, ArrowLeft, Form } from "lucide-react";
 import { api } from "../../api/axios";
 import { type RootState } from "../../store/store";
 import Modal from "../../components/Modal";
@@ -26,6 +18,7 @@ const SingleProperty = () => {
   const { user } = useSelector((state: RootState) => state.auth);
 
   const [property, setProperty] = useState<any>(null);
+  const [isApplying, setIsApplying] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -43,7 +36,7 @@ const SingleProperty = () => {
 
   useEffect(() => {
     fetchProperty();
-  });
+  }, [id]);
 
   const isOwner = user?.id === property?.ownerId;
 
@@ -56,6 +49,23 @@ const SingleProperty = () => {
       navigate("/my-properties");
     } catch (err) {
       toast.error("Failed to delete");
+    }
+  };
+
+  const handleApply = async () => {
+    try {
+      setIsApplying(true);
+      const res = await privateApi.post("/applications/property", {
+        propertyId: property.id,
+        message: `I am interested in renting: ${property.title}`,
+      });
+      toast.success(res.data.message || "Application sent successfully!");
+    } catch (err: any) {
+      toast.error(
+        err.response?.data?.message || "Failed to apply for this property."
+      );
+    } finally {
+      setIsApplying(false);
     }
   };
 
@@ -145,15 +155,17 @@ const SingleProperty = () => {
               </div>
             </div>
           ) : (
-            <div className="bg-white p-8 rounded-4xl border border-gray-100 shadow-xl shadow-indigo-100/30">
-              <h3 className="text-xl font-bold mb-6">
-                Apply for this property.
-              </h3>
-              <div className="space-y-4">
-                <button className="w-full flex items-center justify-center gap-2 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 transition-all">
-                  <Form className="w-5 h-5" /> Apply Now
-                </button>
-              </div>
+            <div className="bg-white p-8 rounded-[48px] shadow-xl border border-gray-100 space-y-4">
+              <button
+                onClick={handleApply}
+                disabled={isApplying}
+                className="w-full py-5 bg-gray-900 text-white rounded-[28px] font-black hover:bg-violet-700 transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                {isApplying ? "Sending..." : "Apply as Tenant"}
+              </button>
+              <p className="text-center text-[9px] text-gray-400 font-bold uppercase tracking-[0.2em] px-4 leading-relaxed">
+                You are one step away from finding your next stay.
+              </p>
             </div>
           )}
         </div>

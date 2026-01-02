@@ -1,12 +1,13 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import type { RegisterUser } from "../../types/authenticationTypes";
-import {api} from "../../api/axios";
+import { api } from "../../api/axios";
 import toast from "react-hot-toast";
 import {
   AlertCircle,
   CheckCircle2,
   Lock,
   Mail,
+  Phone,
   Upload,
   User,
 } from "lucide-react";
@@ -31,6 +32,7 @@ const SignUp: React.FC<SignUpProps> = ({ onSuccess }) => {
     formData.append("fullName", data.fullName);
     formData.append("email", data.email);
     formData.append("password", data.password);
+    formData.append("phone", data.phone);
     if (data.idCard?.[0]) {
       formData.append("idCard", data.idCard[0]);
     }
@@ -97,6 +99,30 @@ const SignUp: React.FC<SignUpProps> = ({ onSuccess }) => {
         {errors.email && (
           <p className="text-xs text-red-500 flex items-center gap-1 ml-1">
             <AlertCircle className="h-3 w-3" /> {errors.email.message}
+          </p>
+        )}
+      </div>
+      <div className="space-y-1">
+        <div className="relative">
+          <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-violet-400" />
+          <input
+            {...register("phone", {
+              required: "Phone number is required",
+              pattern: {
+                value: /^\d{10}$/,
+                message: "Phone number must be exactly 10 digits.",
+              },
+            })}
+            type="tel"
+            placeholder="Phone Number (10 digits)"
+            className={`w-full pl-10 pr-4 py-3 bg-gray-50 border ${
+              errors.phone ? "border-red-500" : "border-gray-200"
+            } rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all text-sm`}
+          />
+        </div>
+        {errors.phone && (
+          <p className="text-xs text-red-500 flex items-center gap-1 ml-1">
+            <AlertCircle className="h-3 w-3" /> {errors.phone.message}
           </p>
         )}
       </div>
