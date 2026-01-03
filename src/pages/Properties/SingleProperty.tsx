@@ -41,11 +41,11 @@ const SingleProperty = () => {
   const isOwner = user?.id === property?.ownerId;
 
   const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to delete this listing?"))
+    if (!window.confirm("Are you sure you want to delete this property?"))
       return;
     try {
       await privateApi.delete(`/properties/${id}`);
-      toast.success("Listing removed");
+      toast.success("Property removed");
       navigate("/my-properties");
     } catch (err) {
       toast.error("Failed to delete");

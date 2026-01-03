@@ -95,10 +95,7 @@ const RoommatePage = () => {
           <div className="flex-1">
             <div className="hidden lg:flex mb-10 items-center justify-between">
               <h1 className="text-3xl font-black text-gray-900 italic">
-                Roommate Openings{" "}
-                <span className="text-indigo-600 ml-2">
-                  ({filtered.length})
-                </span>
+                Roommate Openings
               </h1>
             </div>
 

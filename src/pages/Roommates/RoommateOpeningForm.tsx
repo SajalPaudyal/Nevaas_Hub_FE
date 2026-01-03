@@ -130,7 +130,7 @@ const RoommateOpeningForm: React.FC<RoommateFormProps> = ({
           <HousePlus className="absolute left-3 top-3.5 h-5 w-5 text-violet-400" />
           <input
             {...register("title", { required: "Title is required" })}
-            placeholder="Listing Title"
+            placeholder="Title"
             className="w-full pl-10 pr-4 py-3 bg-gray-50 rounded-xl outline-none text-sm border border-transparent focus:ring-1 ring-violet-200"
           />
           <ErrorMsg name="title" />

@@ -99,7 +99,7 @@ const SingleRoommateOpening = () => {
         onClick={() => navigate(-1)}
         className="flex items-center text-gray-400 hover:text-violet-600 mb-8 transition-colors font-black text-xs uppercase tracking-widest"
       >
-        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Listings
+        <ArrowLeft className="w-4 h-4 mr-2" /> Back to all Roommates
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -309,7 +309,7 @@ const SingleRoommateOpening = () => {
                   {isApplying ? "Sending..." : "Apply as Roommate"}
                 </button>
                 <p className="text-center text-[9px] text-gray-400 font-bold uppercase tracking-[0.2em] px-4 leading-relaxed">
-                  Your ideal roommate is waiting for your application. 
+                  Your ideal roommate is waiting for your application.
                 </p>
               </div>
             )}
